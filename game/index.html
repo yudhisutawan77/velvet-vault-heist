@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Velvet Vault — a heist game</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #0a0c14;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+  }
+  #wrap { text-align: center; }
+  canvas {
+    display: block;
+    width: 1280px;
+    height: 720px;
+    max-width: 96vw;
+    max-height: 92vh;
+    image-rendering: auto;
+    box-shadow: 0 0 60px rgba(227, 179, 65, 0.18);
+  }
+  #caption {
+    color: #8a93ad;
+    font-size: 13px;
+    margin-top: 10px;
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game" width="1280" height="720"></canvas>
+  <div id="caption">THE VELVET VAULT — an original heist game · WASD move · SHIFT run · F interact · Q jammer · E smoke</div>
+</div>
+<script type="module">
+  import { Game } from './src/main.js';
+  import { stageShot } from './src/shots.js';
+  const canvas = document.getElementById('game');
+  const game = new Game(canvas);
+  const shot = new URLSearchParams(window.location.search).get('shot');
+  if (shot) stageShot(shot, game);
+  game.start();
+</script>
+</body>
+</html>
